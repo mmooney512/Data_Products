@@ -1,0 +1,65 @@
+---
+title: "Untitled"
+author: "michael.coursera@eipsoftware.com"
+date: "November 23, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Airports of Hawaii
+
+Below is a map of the airports located in the state of Hawaii.
+
+<br />
+<br />
+
+```{r load_library, echo=FALSE, message=FALSE}
+library(dplyr)
+library(leaflet)
+```
+
+```{r create_map, echo=FALSE}
+airports <- data.frame(
+  lat = c(21.318700790405273, 20.89859962463379, 19.738800048828125
+  		, 19.721399307250977, 21.976111 ,20.785556 ,21.152778),
+  lng = c(-157.9219970703125, -156.42999267578125, -156.04600524902344
+  		, -155.04800415039062, -159.338889, -156.951389, -157.096389))
+
+#create the icon
+#makeIcon(iconUrl="https://mmooney512.github.io/Data_Products/airplane.png"
+airplane_icon <- makeIcon(iconUrl = "http://www.eipsoftware.com/pix/airplane.png"
+						  		  , iconWidth = 29
+						  , iconHeight = 31
+						  , iconAnchorX = 15
+						  , iconAnchorY = 16
+						)
+
+airport_details = c("Honolulu Airport: HNL"
+					,"Maui Aiport: OGG"
+					,"Kona Airport: KOA"
+					,"Hilo Airport: ITO"
+					,"Kauai Airport: LIH"
+					,"Lanai Airport: LNY"
+					,"Molakai Airport: MKK"
+					)
+
+#create the map
+airports 	%>%
+	leaflet()	%>%
+	addTiles()	%>%
+	addMarkers(icon = airplane_icon, popup = airport_details)
+
+```
+
+
+<br />
+<br />
+<br />
+
+***
+
+#### Map data 
+Source: [Wikipedia](http://www.wikipedia.com)
