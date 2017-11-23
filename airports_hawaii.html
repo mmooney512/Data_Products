@@ -139,9 +139,40 @@ $(document).ready(function () {
 <h2>Airports of Hawaii</h2>
 <p>Below is a map of the airports located in the state of Hawaii.</p>
 <p><br /> <br /></p>
-<div id="htmlwidget-930a2efb93f9f619e621" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-930a2efb93f9f619e621">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[21.3187007904053,20.8985996246338,19.7388000488281,19.721399307251,21.976111,20.785556,21.152778],[-157.921997070312,-156.429992675781,-156.046005249023,-155.048004150391,-159.338889,-156.951389,-157.096389],{"iconUrl":{"data":"http://www.eipsoftware.com/pix/airplane.png","index":0},"iconWidth":29,"iconHeight":31,"iconAnchorX":15,"iconAnchorY":16},null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Honolulu Airport: HNL","Maui Aiport: OGG","Kona Airport: KOA","Hilo Airport: ITO","Kauai Airport: LIH","Lanai Airport: LNY","Molakai Airport: MKK"],null,null,null,null,null,null]}],"limits":{"lat":[19.721399307251,21.976111],"lng":[-159.338889,-155.048004150391]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-706edaa7dbb91700abb4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-706edaa7dbb91700abb4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[21.3187007904053,20.8985996246338,19.7388000488281,19.721399307251,21.976111,20.785556,21.152778],[-157.921997070312,-156.429992675781,-156.046005249023,-155.048004150391,-159.338889,-156.951389,-157.096389],{"iconUrl":{"data":"http://www.eipsoftware.com/pix/airplane.png","index":0},"iconWidth":29,"iconHeight":31,"iconAnchorX":15,"iconAnchorY":16},null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Honolulu Airport: HNL","Maui Aiport: OGG","Kona Airport: KOA","Hilo Airport: ITO","Kauai Airport: LIH","Lanai Airport: LNY","Molakai Airport: MKK"],null,null,null,null,null,null]}],"limits":{"lat":[19.721399307251,21.976111],"lng":[-159.338889,-155.048004150391]}},"evals":[],"jsHooks":[]}</script>
 <p><br /> <br /> <br /></p>
+<hr />
+<pre class="r"><code>airports &lt;- data.frame(
+  lat = c(21.318700790405273, 20.89859962463379, 19.738800048828125
+        , 19.721399307250977, 21.976111 ,20.785556 ,21.152778),
+  lng = c(-157.9219970703125, -156.42999267578125, -156.04600524902344
+        , -155.04800415039062, -159.338889, -156.951389, -157.096389))
+
+#create the icon
+#makeIcon(iconUrl=&quot;https://mmooney512.github.io/Data_Products/airplane.png&quot;
+#source for the airplain icon is wikipedia commons; hosting on personal website
+airplane_icon &lt;- makeIcon(iconUrl = &quot;http://www.eipsoftware.com/pix/airplane.png&quot;
+                                  , iconWidth = 29
+                          , iconHeight = 31
+                          , iconAnchorX = 15
+                          , iconAnchorY = 16
+                        )
+
+airport_details = c(&quot;Honolulu Airport: HNL&quot;
+                    ,&quot;Maui Aiport: OGG&quot;
+                    ,&quot;Kona Airport: KOA&quot;
+                    ,&quot;Hilo Airport: ITO&quot;
+                    ,&quot;Kauai Airport: LIH&quot;
+                    ,&quot;Lanai Airport: LNY&quot;
+                    ,&quot;Molakai Airport: MKK&quot;
+                    )
+
+#create the map
+airports    %&gt;%
+    leaflet()   %&gt;%
+    addTiles()  %&gt;%
+    addMarkers(icon = airplane_icon, popup = airport_details)</code></pre>
 <hr />
 <div id="map-data" class="section level4">
 <h4>Map data</h4>
