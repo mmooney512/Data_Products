@@ -1,0 +1,116 @@
+---
+title: "plotly_example.Rmd"
+author: "michael.coursera@eipsoftware.com"
+date: "November 23, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exchange rates of British Pound against other currencies.
+
+The line graph below shows the historical exchange rate. on the first of each month, of the British Pound against three other currencies.
+
++ GBP-USD  British Pound compared against the United States Dollar
++ GBP-EUR  British Pound against the Euro	
++ GBP-CHF  British Pound against the Swiss Franc
+
+Date Great Britian voted for leaving the European Union **23 Jun 2016.**
+
+<br />
+<br />
+
+```{r load_library, echo=FALSE, message=FALSE}
+library(dplyr)
+library(plotly)
+xe <- read.csv("xe_rates.csv")
+
+xe <- xe %>% mutate(Month = as.Date(Month, format="%m/%d/%Y"))
+
+#list variables to hold the parameters
+font_x <- list(family = "Arial, sans-serif"
+			  ,size = 8
+			)
+
+axis_x <- list(title = "Month"
+			  ,tickFont = font_x
+			  ,tickangle = -90
+			)
+
+xe_margins <- list(t=100, r=50, b=160, l=140, pad=10)
+
+#plot the graph
+xe_plot <- plot_ly(xe, x = ~Month, y = ~GBP.USD, name = "GBP-USD" ,type = 'scatter', mode = 'lines') %>%
+		   add_trace(y = ~GBP.EUR, name="GBP-EUR") %>%
+		   add_trace(y = ~GBP.CHF, name="GBP-CHF") %>%
+		   layout(title = "Exchange rates of British Pound"
+				 ,margin = xe_margins
+		   	   	 ,xaxis = axis_x
+		   	     ,yaxis = list(title ="Exchange Rate")
+		   	   	 )
+
+xe_plot
+```
+
+
+
+
+
+***
+
+### R Source Code
+
+<br />
+<br />
+
+```{r echo=TRUE, eval=FALSE}
+library(dplyr)
+library(plotly)
+xe <- read.csv("xe_rates.csv")
+
+xe <- xe %>% mutate(Month = as.Date(Month, format="%m/%d/%Y"))
+
+#list variables to hold the parameters
+font_x <- list(family = "Arial, sans-serif"
+			  ,size = 8
+			)
+
+axis_x <- list(title = "Month"
+			  ,tickFont = font_x
+			  ,tickangle = -90
+			)
+
+xe_margins <- list(t=100, r=50, b=160, l=140, pad=10)
+
+#plot the graph
+font_x <- list(family = "Arial, sans-serif"
+			  ,size = 8
+			)
+
+axis_x <- list(title = "Month"
+			  ,tickFont = font_x
+			  ,tickangle = -90
+			)
+
+xe_margins <- list(t=100, r=50, b=160, l=140, pad=10)
+
+xe_plot <- plot_ly(xe, x = ~Month, y = ~GBP.USD, name = "GBP-USD" ,type = 'scatter', mode = 'lines') %>%
+		   add_trace(y = ~GBP.EUR, name="GBP-EUR") %>%
+		   add_trace(y = ~GBP.CHF, name="GBP-CHF") %>%
+		   layout(title = "Exchange rates of British Pound"
+				 ,margin = xe_margins
+		   	   	 ,xaxis = axis_x
+		   	     ,yaxis = list(title ="Exchange Rate")
+		   	   	 )
+
+xe_plot
+```
+
+
+
+
+
+***
+Source for XE data: [www.x-rates.com](http://www.x-rates.com)
